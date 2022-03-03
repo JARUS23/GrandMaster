@@ -8,7 +8,7 @@ public class ChessBoard extends JPanel {
     private Square squares[][];
     private Color white, black;
 
-    public ChessBoard(Dimension size)
+    public ChessBoard(BoardState boardState, Dimension size)
     {
         super(new GridLayout(8, 8));
 
@@ -26,7 +26,7 @@ public class ChessBoard extends JPanel {
         for (int i = 0; i < squares.length; i++)
             for (int j = 0; j < squares.length; j++)
             {
-                squares[i][j] = new Square();
+                squares[i][j] = new Square(boardState, i, j);
                 squares[i][j].setBorder(null);  // TODO Try different Borders
             }
 
