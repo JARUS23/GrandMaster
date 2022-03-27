@@ -26,4 +26,15 @@ public class Square extends JButton {
             boardState.getBoardState()[i][j].draw(g);
     }
 
+    // GETTER
+    public int getI()
+    {
+        return i;
+    }
+
+    // GETTER
+    public int getJ()
+    {
+        return j;
+    }
 }

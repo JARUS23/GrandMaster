@@ -2,8 +2,12 @@ package com.jarus.board;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class ChessBoard extends JPanel {
+public class ChessBoard extends JPanel implements MouseListener {
+
+    private BoardState boardState;
 
     private Square squares[][];
     private Color white, black;
@@ -11,6 +15,8 @@ public class ChessBoard extends JPanel {
     public ChessBoard(BoardState boardState, Dimension size)
     {
         super(new GridLayout(8, 8));
+
+        this.boardState = boardState;
 
         // Setting the colors for white and black
         white = new Color(243,210,165);
@@ -28,6 +34,7 @@ public class ChessBoard extends JPanel {
             {
                 squares[i][j] = new Square(boardState, i, j);
                 squares[i][j].setBorder(null);  // TODO Try different Borders
+                squares[i][j].addMouseListener(this);
             }
 
         // Adding the squares on the JPanel
@@ -59,4 +66,34 @@ public class ChessBoard extends JPanel {
         repaint();
     }
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        Square square = (Square) e.getComponent();
+
+        // Checking if the selected square is not empty
+        if (boardState.getBoardState()[square.getI()][square.getJ()] != null)
+        {
+            boardState.getBoardState()[square.getI()][square.getJ()].getMoves(boardState);
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
 }
